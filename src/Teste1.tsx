@@ -44,7 +44,15 @@ export const Teste1 = () => {
     if (selectedRect !== null) {
       const colorClass = `bg--${color.toLocaleLowerCase()}`;
       const rects = document.querySelectorAll(".teste1__rect");
-      (rects[selectedRect] as HTMLElement).classList.add(colorClass);
+      const selectedRectElement = rects[selectedRect] as HTMLElement;
+
+      for (const className of selectedRectElement.classList) {
+        if (className.startsWith("bg--")) {
+          selectedRectElement.classList.remove(className);
+        }
+      }
+
+      selectedRectElement.classList.add(colorClass);
     }
   };
 
