@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+button {
+  all: unset;
+}
+
 .teste1 {
   width: 100vw;
   height: 100vh;
@@ -21,4 +25,62 @@ body {
 
   background-color: black;
   border-radius: 16px;
+}
+
+.menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.menu__list {
+  list-style: none;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu__list__item {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+
+  border-radius: 4px;
+}
+
+.menu__list__item span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.menu__list__item:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* Helpers Classes  */
+
+.bg--vermelho {
+  background-color: #FF564D;
+}
+
+.bg--azul {
+  background-color: #1E53F1;
+}
+
+.bg--verde {
+  background-color: #39B26C;
 }
