@@ -49,24 +49,29 @@ button {
 }
 
 .menu__list__item {
+  display: flex;
+}
+
+.menu__list__item button {
   cursor: pointer;
 
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 4px 8px;
+  width: 100%;
 
   border-radius: 4px;
 }
 
-.menu__list__item span {
+.menu__list__item button span {
   display: block;
   width: 8px;
   height: 8px;
   border-radius: 2px;
 }
 
-.menu__list__item:hover {
+.menu__list__item button:hover {
   background-color: #f0f0f0;
 }
 

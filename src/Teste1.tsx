@@ -1,59 +1,22 @@
-import { useEffect, useState } from "react";
+import { Menu, Rectangle } from "./components";
 
-import { Menu } from "./components";
+import { useColorSelection, useContextMenu } from "./hooks";
 
 import "./Teste1.css";
 
 export const Teste1 = () => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [selectedRect, setSelectedRect] = useState<number | null>(null);
-  const [menuPosition, setMenuPosition] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (showMenu) {
-        const contextMenu = document.querySelector(".menu");
-        if (contextMenu && !contextMenu.contains(event.target as Node)) {
-          setShowMenu(false);
-        }
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [showMenu]);
+  const { showMenu, menuPosition, openContextMenu, closeContextMenu } =
+    useContextMenu();
+  const { setSelectedRect, handleColorSelect } =
+    useColorSelection(closeContextMenu);
 
   const handleContextMenu = (
     e: React.MouseEvent<HTMLDivElement>,
     rectIndex: number
   ) => {
     e.preventDefault();
+    openContextMenu(e.clientX, e.clientY);
     setSelectedRect(rectIndex);
-    setMenuPosition({ x: e.clientX, y: e.clientY });
-    setShowMenu(true);
-  };
-
-  const handleColorSelect = (color: string) => {
-    setShowMenu(false);
-    if (selectedRect !== null) {
-      const colorClass = `bg--${color.toLocaleLowerCase()}`;
-      const rects = document.querySelectorAll(".teste1__rect");
-      const selectedRectElement = rects[selectedRect] as HTMLElement;
-
-      for (const className of selectedRectElement.classList) {
-        if (className.startsWith("bg--")) {
-          selectedRectElement.classList.remove(className);
-        }
-      }
-
-      selectedRectElement.classList.add(colorClass);
-    }
   };
 
   return (
@@ -66,11 +29,10 @@ export const Teste1 = () => {
         />
       ) : null}
       {[0, 1, 2, 3, 4].map((_, index) => (
-        <div
+        <Rectangle
           key={index}
-          className="teste1__rect"
           onContextMenu={(e) => handleContextMenu(e, index)}
-        ></div>
+        />
       ))}
     </div>
   );

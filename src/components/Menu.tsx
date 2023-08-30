@@ -16,8 +16,10 @@ export const Menu = ({ xPos, yPos, onSelectOption }: MenuProps) => {
       <ul className="menu__list">
         {menuOptions.map((option) => (
           <li key={option} className="menu__list__item">
-            <span className={`bg--${option}`}></span>
-            <button onClick={() => handleOptionSelect(option)}>{option}</button>
+            <button onClick={() => handleOptionSelect(option)}>
+              <span className={`bg--${option}`}></span>
+              {option}
+            </button>
           </li>
         ))}
       </ul>
